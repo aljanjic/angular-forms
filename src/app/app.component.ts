@@ -13,9 +13,21 @@ export class AppComponent {
   defaultQuestion = 'teacher';
   answer = '';
   genders = ['male', 'female'];
+  user = {
+    username: '',
+    email: '',
+    secretQuestion: '',
+    answer: '',
+    gender: '',
+  }
+
+  formSubmitted = false;
 
   suggestUserName() {
     const suggestedName = 'Superuser';
+
+    // Setting the form data
+
     // this.singUpForm.setValue({
     //   userData: {
     //     username: suggestedName,
@@ -26,6 +38,7 @@ export class AppComponent {
     //   gender: 'male'
     // })
 
+    // Patching form data
     this.singUpForm.form.patchValue({
       userData: {
         username: suggestedName
@@ -36,7 +49,14 @@ export class AppComponent {
 
 
   onSubmit(){
-    console.log(this.singUpForm)
+    this.formSubmitted = true;
+    this.user.username = this.singUpForm.form.value.userData.username;
+    this.user.email = this.singUpForm.form.value.userData.email;
+    this.user.secretQuestion = this.singUpForm.form.value.secret;
+    this.user.answer = this.singUpForm.form.value.questionAnswer;
+    this.user.gender = this.singUpForm.form.value.gender;
+
+    this.singUpForm.reset()
   }
 
   // onSubmit(form: NgForm){
